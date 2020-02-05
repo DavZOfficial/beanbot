@@ -7,7 +7,7 @@ load_dotenv()           #load environmentals
 
 
 
-r = reddit.Reddit(client_id='t3SwJQkjzB7hoQ', client_secret=os.getenv('REDDIT_SECRET'), password=os.getenv('REDDIT_PASSWORD'), user_agent='bean bot by /u/DavZOfficial', username='DavZOfficial')
+r = reddit.Reddit(client_id=os.getenv("REDDIT_CLIENT"), client_secret=os.getenv('REDDIT_SECRET'), password=os.getenv('REDDIT_PASSWORD'), user_agent='bean bot by /u/DavZOfficial', username='DavZOfficial')
 print("Connected to Reddit")
 beans = r.subreddit('BeansInThings')
 client = discord.Client()
