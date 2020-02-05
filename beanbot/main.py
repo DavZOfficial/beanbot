@@ -31,7 +31,7 @@ async def on_message(message):
             embeded.set_image(url=post.url)
             await message.channel.send(embed=embeded)
 
-        elif message.content.startswith("bean"):          #if you say bean then you automatically assume you search for something. bean by itself doesnt work
+        elif message.content.strip().lower().startswith("bean"):          #if you say bean then you automatically assume you search for something. bean by itself doesnt work
 
             print("searching for ", message.content.split("bean", 1)[1].strip())
 
