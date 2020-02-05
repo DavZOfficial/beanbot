@@ -14,4 +14,4 @@ Make a .env file and put your corresponding information like this:
 
 Replace information as needed.
 
-Dependencies: discord, os, random, praw, dotenv
+Dependencies: discord.py, os, random, praw, python-dotenv
