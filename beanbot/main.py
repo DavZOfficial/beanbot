@@ -35,8 +35,8 @@ async def on_message(message):
 
             print("searching for ", message.content.split("bean", 1)[1].strip())
 
-            posts = beans.search(message.content.split("bean", 1)[1].strip(), sort="relevance", limit=20)   #random of 10 posts in a search
-            randnum = random.randint(1,20)
+            posts = beans.search(message.content.split("bean", 1)[1].strip(), sort="relevance", limit=10)   #random of 10 posts in a search
+            randnum = random.randint(1,10)
             for i, post in enumerate(posts):   #quickly chooses random post inside
                 if randnum == i:
                     embeded = discord.Embed(title="", value= "huh")
