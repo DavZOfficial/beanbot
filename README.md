@@ -1,5 +1,5 @@
 # beanbot
-posts random picture of bean if you say bean in discord.
+posts random picture of beans in weird places if you say bean in discord.
 
 
 To add this bot to your server, you got to both make a bot in discord and make a bot in reddit. 
