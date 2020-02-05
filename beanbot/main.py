@@ -33,9 +33,9 @@ async def on_message(message):
 
         elif message.content.strip().lower().startswith("bean"):          #if you say bean then you automatically assume you search for something. bean by itself doesnt work
 
-            print("searching for ", message.content.split("bean", 1)[1].strip())
+            print("searching for ", message.content.lower().split("bean", 1)[1].strip())
 
-            posts = beans.search(message.content.split("bean", 1)[1].strip(), sort="relevance", limit=10)   #random of 10 posts in a search
+            posts = beans.search(message.content.lower().split("bean", 1)[1].strip(), sort="relevance", limit=10)   #random of 10 posts in a search
             randnum = random.randint(1,10)
             for i, post in enumerate(posts):   #quickly chooses random post inside
                 if randnum == i:
@@ -47,7 +47,7 @@ async def on_message(message):
                 else:
                     continue
 
-            posts = beans.search(message.content.split("bean", 1)[1].strip(), sort="relevance", limit=1)   #selects only the first post just in case there arent enough posts
+            posts = beans.search(message.content.lower().split("bean", 1)[1].strip(), sort="relevance", limit=1)   #selects only the first post just in case there arent enough posts
             print("gonna find the first post in search")
             for post in posts:                                                  #for loop that doesnt actually loop
                 embeded = discord.Embed(title="", value= "huhh")
