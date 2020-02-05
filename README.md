@@ -6,6 +6,7 @@ To add this bot to your server, you got to both make a bot in discord and make a
 
 Make a .env file and put your corresponding information like this:
 
+        REDDIT_CLIENT=<>
         REDDIT_SECRET=<>
         REDDIT_PASSWORD=<>
         DISCORD_ID=<>
