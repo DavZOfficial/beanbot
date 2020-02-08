@@ -1,8 +1,10 @@
-import discord, os, random
+import discord, os, random, time, asyncio
 import praw as reddit
 
 from dotenv import load_dotenv
 load_dotenv()           #load environmentals
+
+
 
 
 
@@ -12,10 +14,34 @@ print("Connected to Reddit")
 beans = r.subreddit('BeansInThings')
 client = discord.Client()
 
+
+
+random_titles = ["what? are you not satisfied with the number of commands?", "Yeah thats it. Did you expect more?", "what friggin else would you want in this bot?", "ok we get it you thought there was more. There isnt."]
+random_descriptors = ["idek bro", "oh.... uhh....", "wait what the hell that was it? ok then...", "*disappointment ensues*", "bean is not proud", "no", "just use the bot or something its there to serve one singular purpose in it's life."]
+
+random_nothing = ["No beans today", "No beans were found", "*Lack of bean*", "*lack of beanage*", "disappointed, there are no beans", "ERROR: NO BEANS", "Beans not detected", "beans are invisible or something", "beans dont0 work", "for some ungodly reason the stupid post that i chose randomly chose not to show us some beans. What a scam.", "beanage 'nt", "WHERE ARE THE BEANS???", "i swear to god "]
+
+activities = ["with some beans", "with remnants of beans", "with a can of beans", "with a can opener", "a game of stacking bean cans", "some random bean flash game", "with my bean", "beanhog day", "the new Pirates of the Carob Bean game", "your mum's beans", "with a bean bag", "with spilt beans", "to bean or not to bean", "with Mr Bean's beans", "just beaning around", "experiencing the blue bean of death", "... Bean and not heard", "with the roast of us", "with the idea of becoming a coffee bean"]
+
+
+
+
+async def threaded_change_status():
+    await asyncio.sleep(100)
+    await client.change_presence(status=discord.Status.do_not_disturb)
+    await asyncio.sleep(100)
+    await client.change_presence(status=discord.Status.idle)
+    await asyncio.sleep(100)
+    await client.change_presence(status=discord.Status.online)
+    await asyncio.sleep(2)
+    await client.change_presence(activity=discord.Game(random.choice(activities) + " | bean help"))
+
 @client.event
 async def on_ready():
     print('Connected to discord as {0.user}'.format(client))
-    await client.change_presence(status=discord.Status.idle, activity=discord.Game(" with some beans"))   #initialised bot
+    await client.change_presence(status=discord.Status.idle, activity=discord.Game(random.choice(activities) + " | bean help"))   #initialised bot
+    client.loop.create_task(threaded_change_status())
+
 
 
 def find_beans(search_term = ""):
@@ -47,11 +73,6 @@ def find_beans(search_term = ""):
 
 
 
-random_titles = ["what? are you not satisfied with the number of commands?", "Yeah thats it. Did you expect more?", "what friggin else would you want in this bot?", "ok we get it you thought there was more. There isnt."]
-random_descriptors = ["idek bro", "oh.... uhh....", "wait what the hell that was it? ok then...", "*disappointment ensues*", "bean is not proud", "no", "just use the bot or something its there to serve one singular purpose in it's life."]
-
-random_nothing = ["No beans today", "No beans were found", "*Lack of bean*", "*lack of beanage*", "disappointed, there are no beans", "ERROR: NO BEANS", "Beans not detected", "beans are invisible or something", "beans dont0 work", "for some ungodly reason the stupid post that i chose randomly chose not to show us some beans. What a scam.", "beanage 'nt", "WHERE ARE THE BEANS???", "i swear to god "]
-
 
 def random_hex():
     return random.randint(0, 16777216)
@@ -61,7 +82,7 @@ async def on_message(message):
     if message.author == client.user:
         return                          #bot doesnt talk to itself
 
-    if len(message.content.strip()) > 19:
+    if len(message.content.strip()) > 14:
         return
 
     if message.content.strip().lower().startswith('bean'):
@@ -91,7 +112,7 @@ async def on_message(message):
             return
 
         elif message.content.strip().lower().startswith("bean"):          #if you say bean then you automatically assume you search for something. bean by itself doesnt work
-            post = find_beans(message.content.strip().lower().split("bean", 1)[1].strip())
+            post = find_beans(message.content.strip().lower().split("bean ", 1)[1].strip())
             if post == None:
                 embed=discord.Embed(title="Bean Bot", description="uh", color=random_hex())
                 embed.set_thumbnail(url="https://vignette.wikia.nocookie.net/welcome-to-bloxburg/images/5/58/CanofBeans.png/revision/latest?cb=20171202024558")
